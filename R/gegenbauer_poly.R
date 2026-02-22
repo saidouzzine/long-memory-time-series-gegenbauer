@@ -1,16 +1,18 @@
-#' Gegenbauer Polynomial Coefficients
+#' Coefficients du polynôme de Gegenbauer
 #'
-#' Compute the coefficients C(n; d, u) of the Gegenbauer polynomial expansion:
-#' (1 - 2uB + B^2)^(-d) = sum_{n>=0} C(n; d, u) B^n.
+#' Cette fonction calcule les coefficients C(n; d, u) définis par le
+#' développement :
+#' (1 - 2uB + B^2)^(-d) = Σ C(n; d, u) B^n.
 #'
-#' @param u Numeric scalar, Gegenbauer parameter.
-#' @param d Numeric scalar, fractional exponent.
-#' @param n Integer, number of coefficients to compute.
+#' @param u Numérique. Paramètre de Gegenbauer.
+#' @param d Numérique. Paramètre fractionnaire.
+#' @param n Entier. Nombre de coefficients à calculer.
 #'
-#' @return Numeric vector of length n.
+#' @return Un vecteur numérique de longueur n contenant les coefficients.
 #' @export
 gegenbauer_poly <- function(u, d, n) {
   stopifnot(n >= 2)
+
   C <- numeric(n)
   C[1] <- 1
   C[2] <- 2 * d * u
