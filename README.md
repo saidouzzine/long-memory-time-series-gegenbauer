@@ -108,14 +108,13 @@ Le dépôt contient :
 
 ## 6. Structure recommandée du projet
 ```
-├── R/
-│   ├── GARMA_acf.R
-│   ├── ggb_macoeff.R
-│   ├── GEGENB.R
-│   ├── ggb_sim.R
-│   ├── GARMA_sim.R
-│   ├── GARMA_est.R
-│   └── main.R
+R/
+  ├── gegenbauer_poly.R
+  ├── gegenbauer_ma.R
+  ├── gegenbauer_sim.R
+  ├── garma_acf.R
+  ├── garma_sim.R
+  └── garma_est.R
 ├── data/
 │   └── DLNINO.csv
 ├── requirements.txt
