@@ -1,136 +1,120 @@
-# long-memory-time-series-gegenbauer
-Analyse et modélisation de séries temporelles à mémoire longue via ARFIMA et processus de Gegenbauer à k‑facteurs. Implémentation sous R, estimation, simulation, autocovariances, prévisions et application à des données climatiques et économiques.
-# Analyse de séries temporelles à mémoire longue : ARFIMA, Gegenbauer et modèles GARMA
+# Analyse de séries temporelles à mémoire longue : ARFIMA, Gegenbauer et GARMA
 
 [![R](https://img.shields.io/badge/R-4.0+-276DC3)]()
-[![TimeSeries](https://img.shields.io/badge/Domain-Long%20Memory%20Time%20Series-blue)]()
-[![Modeling](https://img.shields.io/badge/Models-ARFIMA%20%7C%20Gegenbauer%20%7C%20GARMA-orange)]()
-[![Climate](https://img.shields.io/badge/Application-Climate%20Data-lightgrey)]()
-[![Reproducible](https://img.shields.io/badge/Workflow-Reproducible-green)]()
+[![TimeSeries](https://img.shields.io/badge/Domaine-Séries%20Temporelles%20Avancées-blue)]()
+[![Modeling](https://img.shields.io/badge/Modèles-ARFIMA%20%7C%20Gegenbauer%20%7C%20GARMA-orange)]()
+[![Climate](https://img.shields.io/badge/Application-Données%20Climatiques-lightgrey)]()
+[![Reproducible](https://img.shields.io/badge/Workflow-Reproductible-green)]()
 
-## 1. Présentation du projet
+## 1. Présentation générale
 
-Ce dépôt présente une étude complète de séries temporelles à mémoire longue appliquée à des données climatiques (indices ENSO / NINO) et économiques.  
+Ce dépôt présente une étude complète des modèles à mémoire longue appliqués à des séries temporelles climatiques (indices ENSO/NINO).  
 L’objectif est d’explorer, simuler et estimer des modèles avancés tels que :
 
-- ARFIMA(p, d, q)  
-- Processus de Gegenbauer à un ou plusieurs facteurs  
-- Modèles GARMA (Gegenbauer ARMA)  
-- Méthodes de prévision associées  
+- ARFIMA  
+- Processus de Gegenbauer (1 ou 2 facteurs)  
+- Modèles GARMA  
+- Analyse spectrale et autocorrélation théorique  
 
 Le projet combine théorie, implémentation R et application à des données réelles.
 
 ## 2. Contexte scientifique
 
-Les séries climatiques et économiques présentent souvent :
+Les séries climatiques présentent souvent une structure complexe :
 
-- une **mémoire longue**,  
-- une **structure spectrale complexe**,  
-- des comportements persistants ou antipersistants,  
-- des fréquences dominantes liées à des cycles naturels.
+- mémoire longue,  
+- persistance ou antipersistence,  
+- pics spectraux liés à des cycles naturels,  
+- dépendances non stationnaires.
 
-Les modèles ARFIMA et Gegenbauer permettent de capturer ces phénomènes grâce à :
-
-- la différenciation fractionnaire,  
-- les polynômes de Gegenbauer,  
-- les processus GARMA à k‑facteurs.
+Les modèles ARFIMA et Gegenbauer permettent de capturer ces phénomènes grâce à la différenciation fractionnaire et aux polynômes de Gegenbauer.  
+Les modèles GARMA étendent cette approche en intégrant une dynamique ARMA.
 
 ## 3. Contenu du dépôt
 
-Le dépôt contient :
+### 3.1 Modules R
 
-1. Scripts R pour :
-   - calcul des polynômes de Gegenbauer,  
-   - simulation de processus Gegenbauer et GARMA,  
-   - estimation des paramètres via recherche sur grille,  
-   - calcul d’autocovariances et autocorrélations,  
-   - visualisation spectrale et temporelle.
+Le dossier `R/` contient les modules essentiels :
 
-2. Données climatiques transformées (indices LNINO, DLNINO).
+- `gegenbauer_poly.R` : calcul des polynômes de Gegenbauer  
+- `gegenbauer_ma.R` : coefficients MA des processus Gegenbauer  
+- `gegenbauer_sim.R` : simulation de processus Gegenbauer  
+- `garma_acf.R` : autocovariance et autocorrélation théoriques GARMA  
+- `garma_sim.R` : simulation GARMA  
+- `garma_est.R` : estimation GARMA par recherche sur grille  
 
-3. Fonctions avancées :
-   - `GARMA_acf`  
-   - `ggb_macoeff`  
-   - `GEGENB`  
-   - `ggb_sim`  
-   - `GARMA.sim`  
-   - `GARMA.est`
+### 3.2 Scripts d’exécution
 
-4. Un script principal orchestrant l’ensemble de l’analyse.
+- `main.R` : pipeline complet d’analyse  
+- `install_packages.R` : installation automatique des dépendances  
+- `requirements.txt` : liste des packages nécessaires  
+
+### 3.3 Données
+
+- `data/DLNINO.csv` : indices climatiques transformés (LNINO, DLNINO)
 
 ## 4. Approche méthodologique
 
 ### 4.1 Analyse exploratoire
-- Visualisation des séries LNINO (NINO12, NINO3, NINO4, NINO34).  
-- ACF, spectres, densités, histogrammes.  
-- Étude des versions différenciées DLNINO.
+- Visualisation des séries LNINO  
+- ACF, spectres, densités  
+- Étude des versions différenciées  
 
-### 4.2 Modélisation ARFIMA
-- Tests de racine unitaire (ADF).  
-- Estimation du paramètre de mémoire longue d.  
-- Sélection de modèles via AIC.
+### 4.2 Modélisation
+- Estimation ARFIMA  
+- Calcul des polynômes de Gegenbauer  
+- Simulation de processus à 1 ou 2 facteurs  
+- Estimation GARMA par grille (u, d, p)  
 
-### 4.3 Processus de Gegenbauer
-- Calcul des polynômes de Gegenbauer.  
-- Coefficients MA généralisés (GLP).  
-- Analyse spectrale et autocorrélation.
-
-### 4.4 Modèles GARMA
-- Modèles à 1 et 2 facteurs.  
-- Calcul des autocovariances et autocorrélations.  
-- Simulation de réalisations GARMA.  
-- Étude de l’impact des paramètres (u, d, phi).
-
-### 4.5 Estimation des paramètres
-- Recherche sur grille (u, d).  
-- Estimation ARMA sur la série transformée.  
-- Reconstruction du processus GARMA.  
-- Comparaison des prévisions AR vs GARMA.
+### 4.3 Validation
+- Comparaison AIC  
+- ACF théorique vs empirique  
+- Analyse spectrale  
 
 ## 5. Compétences mises en avant
 
 ### 5.1 Data Science
-- Analyse de séries temporelles complexes.  
-- Modélisation statistique avancée.  
-- Implémentation de modèles non standards.  
-- Prévision et validation.
+- Séries temporelles avancées  
+- Modélisation statistique  
+- Prévision et analyse spectrale  
 
-### 5.2 R et ingénierie logicielle
-- Construction de modules réutilisables.  
-- Documentation claire et structurée.  
-- Workflow reproductible.  
-- Visualisation scientifique.
+### 5.2 Ingénierie logicielle
+- Code modulaire et documenté  
+- roxygen2  
+- Workflow reproductible  
+- Architecture de type package R  
 
 ### 5.3 Expertise métier
-- Analyse de données climatiques ENSO/NINO.  
-- Compréhension des phénomènes de mémoire longue.  
-- Interprétation des structures spectrales.
+- Analyse climatique ENSO/NINO  
+- Interprétation de la mémoire longue  
+- Dynamique multi‑facteurs  
 
-## 6. Structure recommandée du projet
+## 6. Structure du projet
+
 ```
-R/
-  ├── gegenbauer_poly.R
-  ├── gegenbauer_ma.R
-  ├── gegenbauer_sim.R
-  ├── garma_acf.R
-  ├── garma_sim.R
-  └── garma_est.R
+├── R/
+│   ├── gegenbauer_poly.R
+│   ├── gegenbauer_ma.R
+│   ├── gegenbauer_sim.R
+│   ├── garma_acf.R
+│   ├── garma_sim.R
+│   └── garma_est.R
 ├── data/
 │   └── DLNINO.csv
-├── requirements.txt
+├── main.R
 ├── install_packages.R
+├── requirements.txt
 └── README.md
 ```
 
 ## 7. Auteur
 
-Projet réalisé par **Said Ouzzine**, Data Scientist spécialisé en :
+Projet développé par **Said Ouzzine**, Data Scientist spécialisé en :
 
-- séries temporelles avancées,  
-- modèles à mémoire longue,  
-- modélisation statistique sous R,  
-- analyse climatique et économique.
+- séries temporelles à mémoire longue,  
+- modélisation statistique avancée,  
+- analyse climatique et économique,  
+- développement de modules R professionnels.
 
-LinkedIn :  
+Profil :  
 https://www.linkedin.com/in/said-ouzzine/
-
