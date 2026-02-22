@@ -1,20 +1,20 @@
-#' Moving-Average Coefficients of a Gegenbauer Process
+#' Coefficients MA d'un processus de Gegenbauer
 #'
-#' Compute the MA representation psi(j) for 1- or 2-factor Gegenbauer processes.
+#' Calcule la représentation en moyenne mobile (MA) d’un processus
+#' Gegenbauer à 1 ou 2 facteurs.
 #'
-#' @param d Numeric vector of length 1 or 2.
-#' @param u Numeric vector of same length as d.
-#' @param trun Integer, truncation order.
+#' @param d Vecteur numérique (1 ou 2 éléments). Paramètres fractionnaires.
+#' @param u Vecteur numérique (même longueur que d). Paramètres Gegenbauer.
+#' @param trun Entier. Ordre de troncature.
 #'
-#' @return Numeric vector of length trun + 1.
+#' @return Un vecteur numérique contenant les coefficients MA.
 #' @export
 gegenbauer_ma <- function(d, u, trun = 50000) {
   k <- length(d)
   stopifnot(k %in% c(1, 2))
 
   if (k == 1) {
-    C <- gegenbauer_poly(u, d, trun)
-    return(C)
+    return(gegenbauer_poly(u, d, trun))
   }
 
   C1 <- gegenbauer_poly(u[1], d[1], trun)
