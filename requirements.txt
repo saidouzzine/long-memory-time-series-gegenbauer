@@ -1,0 +1,7 @@
+# Version de R
+R==4.3.1
+
+# Packages nécessaires
+stats==4.3.1
+utils==4.3.1
+MASS==7.3-60
